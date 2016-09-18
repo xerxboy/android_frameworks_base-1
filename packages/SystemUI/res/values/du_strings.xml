@@ -108,6 +108,12 @@
     
     <string name="global_action_reboot_recovery">Recovery</string>
    <string name="global_action_reboot">Restart</string>
+    
+    <!-- Sound QS Tile -->
+    <string name="quick_settings_sound_label">Sound</string>
+    <string name="quick_settings_sound_ring">Ring</string>
+    <string name="quick_settings_sound_vibrate">Vibrate</string>
+    <string name="quick_settings_sound_dnd">Do not disturb</string>
 
     <!-- Navigation bar dpad -->
     <string name="accessibility_dpad_left">Cursor left</string>
