@@ -4795,8 +4795,14 @@ public final class Settings {
          */
         public static final String ANIM_TILE_STYLE = "anim_tile_style";
 
-         /**
-         * Change quick settings tiles animation duration
+        /**
+         * Whether to display cross sign for a data disabled connection
+         * @hide
+         */
+         public static final String DATA_DISABLED_ICON = "data_disabled_icon";
+
+        /**
+         * Whether the phone ringtone should be played in an increasing manner
          * @hide
          */
         public static final String ANIM_TILE_DURATION = "anim_tile_duration";

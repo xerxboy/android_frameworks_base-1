@@ -75,6 +75,7 @@ public class MobileSignalController extends SignalController<
     private SignalStrength mSignalStrength;
     private MobileIconGroup mDefaultIcons;
     private Config mConfig;
+    private boolean mDataDisabledIcon;
 
     // Show lte/4g switch
     private boolean mShowLteFourGee;
@@ -131,6 +132,11 @@ public class MobileSignalController extends SignalController<
            resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.SHOW_LTE_FOURGEE),
                   false, this, UserHandle.USER_ALL);
+           resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.DATA_DISABLED_ICON), 
+                    false, this, UserHandle.USER_ALL);
+                      updateSettings();
+
         }
 
         @Override
@@ -146,6 +152,11 @@ public class MobileSignalController extends SignalController<
                     updateTelephony();
             }
         }
+    private void updateSettings() {
+        ContentResolver resolver = mContext.getContentResolver();
+         mDataDisabledIcon = Settings.System.getIntForUser(resolver,
+                Settings.System.DATA_DISABLED_ICON, 1, 
+                UserHandle.USER_CURRENT) == 1;
     }
 
     public void setConfiguration(Config config) {
@@ -507,7 +518,7 @@ public class MobileSignalController extends SignalController<
         mCurrentState.roaming = isRoaming();
         if (isCarrierNetworkChangeActive()) {
             mCurrentState.iconGroup = TelephonyIcons.CARRIER_NETWORK_CHANGE;
-        } else if (isDataDisabled() && !mConfig.alwaysShowDataRatIcon) {
+        } else if (isDataDisabled() && mDataDisabledIcon/*!mConfig.alwaysShowDataRatIcon*/) {
             mCurrentState.iconGroup = TelephonyIcons.DATA_DISABLED;
         }
         if (isEmergencyOnly() != mCurrentState.isEmergency) {
