@@ -171,7 +171,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         updateResources();
 
         Rect tintArea = new Rect(0, 0, 0, 0);
-        int colorForeground = Utils.getColorAttr(getContext(), android.R.attr.colorForeground);
+        int colorForeground = Utils.getColorAttrDefaultColor(getContext(),
+                android.R.attr.colorForeground);
         float intensity = getColorIntensity(colorForeground);
         int fillColor = fillColorForIntensity(intensity, getContext());
 
@@ -618,10 +619,10 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         //host.setHeaderView(mExpandIndicator);
         mHeaderQsPanel.setQSPanelAndHeader(mQsPanel, this);
         mHeaderQsPanel.setHost(host, null /* No customization in header */);
-       
+
        if (mBatteryInQS) {
 	            Rect tintArea = new Rect(0, 0, 0, 0);	            
-                   float colorIntensity = getColorIntensity(Utils.getColorAttr(getContext(), android.R.attr.colorForeground));
+                   float colorIntensity = getColorIntensity(Utils.getColorAttrDefaultColor(getContext(), android.R.attr.colorForeground));
             int fillColorForIntensity = fillColorForIntensity(colorIntensity, getContext());
             mBatteryRemainingIcon.setColorsFromContext(mHost.getContext());
             mBatteryRemainingIcon.onDarkChanged(tintArea, colorIntensity, fillColorForIntensity);
