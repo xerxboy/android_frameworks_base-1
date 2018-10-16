@@ -454,7 +454,6 @@ interface IWindowManager
      */
     void takeOPScreenshot(int type, int reason);
     void stopLongshotConnection();
-    boolean isGestureButtonRegion(int i, int i2);
 
     // This requires the ONE_HANDED_MODE permission.
     boolean isOneHandedModeAvailable();
