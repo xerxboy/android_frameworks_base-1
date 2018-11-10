@@ -440,8 +440,9 @@ public class PhoneStatusBarPolicy implements Callback, Callbacks,
         int iconId = R.drawable.stat_sys_data_bluetooth;
         String contentDescription =
                 mContext.getString(R.string.accessibility_quick_settings_bluetooth_on);
-        boolean bluetoothVisible = false;
+        boolean bluetoothEnabled = false;
         if (mBluetooth != null) {
+            bluetoothEnabled = mBluetooth.isBluetoothEnabled();
             final Collection<CachedBluetoothDevice> devices = mBluetooth.getDevices();
             if (devices != null) {
                 // get battery level for the first device with battery level support
@@ -466,7 +467,51 @@ public class PhoneStatusBarPolicy implements Callback, Callbacks,
         }
 
         mIconController.setIcon(mSlotBluetooth, iconId, contentDescription);
-        mIconController.setIconVisibility(mSlotBluetooth, bluetoothVisible);
+        mIconController.setIconVisibility(mSlotBluetooth, bluetoothEnabled);
+    }
+
+    private int getBtLevelIconRes(int batteryLevel) {
+        if (batteryLevel == 100) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_9;
+        } else if (batteryLevel >= 90) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_8;
+        } else if (batteryLevel >= 80) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_7;
+        } else if (batteryLevel >= 70) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_6;
+        } else if (batteryLevel >= 60) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_5;
+        } else if (batteryLevel >= 50) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_4;
+        } else if (batteryLevel >= 40) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_3;
+        } else if (batteryLevel >= 30) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_2;
+        } else if (batteryLevel >= 20) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_1;
+        } else if (batteryLevel >= 10) {
+            return R.drawable.stat_sys_data_bluetooth_connected_battery_0;
+        } else {
+            return R.drawable.stat_sys_data_bluetooth_connected;
+        }
+     }
+
+    private boolean showBatteryForThis(BluetoothClass type) {
+        boolean show = false;
+        if (type != null) {
+            switch (type.getDeviceClass()) {
+            case BluetoothClass.Device.AUDIO_VIDEO_WEARABLE_HEADSET:
+            case BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE:
+                show = true;
+                break;
+            default:
+                show = false;
+                break;
+            }
+        } else {
+            show = false;
+        }
+        return show;
     }
 
     private int getBtLevelIconRes(int batteryLevel) {
