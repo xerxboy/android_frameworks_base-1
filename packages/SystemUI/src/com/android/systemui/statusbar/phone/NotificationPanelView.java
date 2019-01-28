@@ -143,7 +143,6 @@ public class NotificationPanelView extends PanelView implements
     private VelocityTracker mQsVelocityTracker;
     private boolean mQsTracking;
 
-    private GestureDetector mLockscreenDoubleTapToSleep;
     private boolean mIsLockscreenDoubleTapEnabled;
 
     /**
