@@ -5849,8 +5849,6 @@ public class AudioService extends IAudioService.Stub
                 updateEncodedSurroundOutput();
                 sendEnabledSurroundFormats(mContentResolver, mSurroundModeChanged);
 
-                setVolumeKeysControlRingTone();
-
                 boolean linkNotificationWithVolume = Settings.Secure.getInt(mContentResolver,
                         Settings.Secure.VOLUME_LINK_NOTIFICATION, 1) == 1;
                 if (linkNotificationWithVolume != mLinkNotificationWithVolume) {
