@@ -80,6 +80,8 @@
     <string name="screenshot_abort_text">Операция прервана</string>
     <string name="quick_settings_screenshot_label">Снимок экрана</string>
     <string name="quick_settings_region_screenshot_label">Частичный снимок экрана</string>
+    <!-- OneHand mode QS tile -->
+    <string name="qs_onehand_label">Управление одной рукой</string>
     <!-- Immersive tile -->
     <string name="quick_settings_immersive_tile">Режим погружения</string>
     <string name="quick_settings_immersive_tile_statusbar">Строка состояния</string>
