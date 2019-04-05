@@ -3889,7 +3889,7 @@ public final class Settings {
 
         /** @hide */
         public static final Validator NOTIFICATION_LIGHT_PULSE_VALIDATOR = BOOLEAN_VALIDATOR;
-
+ 
         /**
          * Wheter to show network traffic indicator in statusbar
          * @hide
