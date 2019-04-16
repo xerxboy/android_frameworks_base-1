@@ -15,6 +15,13 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
 import android.provider.Settings;
+import android.app.WallpaperManager;
+import android.graphics.Color;
+import android.app.WallpaperColors;
+import android.support.v7.graphics.Palette;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import java.lang.NullPointerException;
 
 import com.android.systemui.R;
 
@@ -93,6 +100,8 @@ public class CustomTextClock extends TextView {
     private Time mCalendar;
     private boolean mAttached;
     private int handType;
+    private Context mContext;
+
     private boolean h24;
 
     public CustomTextClock(Context context) {
@@ -107,6 +116,7 @@ public class CustomTextClock extends TextView {
 
         handType = a.getInteger(R.styleable.CustomTextClock_HandType, 2);
 
+        mContext = context;
         mCalendar = new Time();
     }
 
@@ -131,6 +141,7 @@ public class CustomTextClock extends TextView {
             // user not the one the context is for.
             getContext().registerReceiverAsUser(mIntentReceiver,
                     android.os.Process.myUserHandle(), filter, null, getHandler());
+
         }
 
         // NOTE: It's safe to do these after registering the receiver since the receiver always runs
@@ -155,6 +166,19 @@ public class CustomTextClock extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (handType == 2) {
+            Bitmap mBitmap;
+            WallpaperManager manager = WallpaperManager.getInstance(mContext);
+            BitmapDrawable mBitmapDrawable = ( (BitmapDrawable) manager.getLockDrawable());
+            try {
+                mBitmap = Bitmap.createBitmap(mBitmapDrawable.getBitmap());
+            } catch (NullPointerException e) {
+                mBitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ALPHA_8);
+                Log.d("CustomTextClock", "NPE");
+            }
+            Palette palette = Palette.generate(mBitmap);
+            setTextColor((Color.valueOf(palette.getLightVibrantColor(0x000000))).toArgb());
+        }
     }
 
     private void onTimeChanged() {
