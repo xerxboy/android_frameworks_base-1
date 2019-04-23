@@ -5365,6 +5365,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_TEXT_CLOCK_ALIGN),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_TEXT_CLOCK_ALIGN),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
