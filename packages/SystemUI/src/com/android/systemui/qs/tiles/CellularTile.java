@@ -40,9 +40,7 @@ import com.android.systemui.Prefs;
 import com.android.systemui.R;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.qs.DetailAdapter;
-import com.android.systemui.plugins.qs.QSIconView;
 import com.android.systemui.plugins.qs.QSTile.SignalState;
-import com.android.systemui.qs.CellTileView;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
@@ -96,11 +94,6 @@ public class CellularTile extends QSTileImpl<SignalState> {
             mController.removeCallback(mSignalCallback);
             mKeyguard.removeCallback(mKeyguardCallback);
         }
-    }
-
-    @Override
-    public QSIconView createTileView(Context context) {
-        return new CellTileView(context);
     }
 
     @Override
