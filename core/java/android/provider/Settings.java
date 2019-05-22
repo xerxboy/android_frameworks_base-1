@@ -4746,16 +4746,6 @@ public final class Settings {
          * 1: Set the brightness to a very low value
          * 2: Set the brightness to a low value
          * 3: Set the brightness to a medium value
-         * Whether to enable gaming mode or not
-         *
-         * @hide
-         */
-        public static final String ENABLE_GAMING_MODE = "enable_gaming_mode";
-
-         /**
-         * Force an Ambient notification when a new media track is being played
-         * 0 - disabled
-         * 1 - show track info within normal Ambient Display and force a new Ambient clean layout when skipping tracks
          * @hide
          */
         public static final String NIGHT_BRIGHTNESS_VALUE = "night_brightness_value";
