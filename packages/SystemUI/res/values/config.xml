@@ -232,6 +232,7 @@
     <!-- Doze: should notifications be used as a pulse signal? -->
     <bool name="doze_pulse_on_notifications">true</bool>
 
+
     <!-- Doze: duration to avoid false pickup gestures triggered by notification vibrations -->
     <integer name="doze_pickup_vibration_threshold">2000</integer>
 
