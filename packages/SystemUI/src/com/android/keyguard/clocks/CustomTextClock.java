@@ -272,7 +272,7 @@ public class CustomTextClock extends TextView {
             if ( units == 0 ) {
                 NumString = TensStringH[tens];
             } else {
-                NumString = TensStringH[tens]+" "+UnitsStringH[units];
+                NumString = TensStringH[tens]+" "+UnitsStringH[units].substring(2, UnitsString[units].length());
             }
         } else if (num < 20 ) {
             NumString = UnitsStringH[num];
@@ -290,7 +290,7 @@ public class CustomTextClock extends TextView {
             if ( units == 0 ) {
                 NumString = TensString[tens];
             } else {
-                NumString = TensString[tens] + " " + UnitsString[units];
+                NumString = TensString[tens] + " " + UnitsString[units].substring(2, UnitsString[units].length());
             }
         } else if (num < 10 ) {
             NumString = res.getString(R.string.text_clock_zero_h_min) +
