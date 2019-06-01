@@ -4858,16 +4858,6 @@ public final class Settings {
          * @hide
          */
         public static final String THEME_TILE_ENABLED_MODE = "theme_tile_enabled_mode";
-        
-         /**
-        * Whether to blink battery light when low
-        * @hide
-        */
-        public static final String INCALL_FEEDBACK_VIBRATE = "incall_feeedback_vibrate";
-
-         /** @hide */
-        public static final Validator INCALL_FEEDBACK_VIBRATE_VALIDATOR =
-                BOOLEAN_VALIDATOR;
 
         /**
          * Whether the phone vibrates on call connect
@@ -5095,7 +5085,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ENABLE);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
-            PRIVATE_SETTINGS.add(INCALL_FEEDBACK_VIBRATE);
         }
 
         /**
@@ -5198,8 +5187,6 @@ public final class Settings {
             VALIDATORS.put(BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
                     BUTTON_BACKLIGHT_ON_TOUCH_ONLY_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
-
-             VALIDATORS.put(INCALL_FEEDBACK_VIBRATE, INCALL_FEEDBACK_VIBRATE_VALIDATOR);
         }
 
         /**
