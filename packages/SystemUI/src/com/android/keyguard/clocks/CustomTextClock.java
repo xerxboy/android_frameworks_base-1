@@ -22,10 +22,6 @@ import android.support.v7.graphics.Palette;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import java.lang.NullPointerException;
-import java.lang.IllegalStateException;
-import android.graphics.Paint;
-import android.os.ParcelFileDescriptor;
-import android.graphics.BitmapFactory;
 
 import com.android.systemui.R;
 
@@ -172,38 +168,16 @@ public class CustomTextClock extends TextView {
         super.onDraw(canvas);
         if (handType == 2) {
             Bitmap mBitmap;
-            //Get wallpaper as bitmap
             WallpaperManager manager = WallpaperManager.getInstance(mContext);
-            ParcelFileDescriptor pfd = manager.getWallpaperFile(WallpaperManager.FLAG_LOCK);
-
-            //Sometimes lock wallpaper maybe null as getWallpaperFile doesnt return builtin wallpaper
-            if (pfd == null)
-                pfd = manager.getWallpaperFile(WallpaperManager.FLAG_SYSTEM);
+            BitmapDrawable mBitmapDrawable = ( (BitmapDrawable) manager.getLockDrawable());
             try {
-                if (pfd != null)
-                {
-                    mBitmap = BitmapFactory.decodeFileDescriptor(pfd.getFileDescriptor());
-                } else {
-                    //Incase both cases return null wallpaper, generate a yellow bitmap
-                    mBitmap = drawEmpty();
-                }
-                Palette palette = Palette.generate(mBitmap);
-
-                //For monochrome and single color bitmaps, the value returned is 0
-                if (Color.valueOf(palette.getLightVibrantColor(0x000000)).toArgb() == 0) {
-                    //So get bodycolor on dominant color instead as a hacky workaround
-                    setTextColor(palette.getDominantSwatch().getBodyTextColor());
-                //On Black Wallpapers set color to White
-                } else if(String.format("#%06X", (0xFFFFFF & (palette.getLightVibrantColor(0x000000)))) == "#000000") {
-                    setTextColor(Color.WHITE);
-                } else {
-                    setTextColor((Color.valueOf(palette.getLightVibrantColor(0xff000000))).toArgb());
-                }
-
-              //Just a fallback, although I doubt this case will ever come
+                mBitmap = Bitmap.createBitmap(mBitmapDrawable.getBitmap());
             } catch (NullPointerException e) {
-                setTextColor(Color.WHITE);
+                mBitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ALPHA_8);
+                Log.d("CustomTextClock", "NPE");
             }
+            Palette palette = Palette.generate(mBitmap);
+            setTextColor((Color.valueOf(palette.getLightVibrantColor(0x000000))).toArgb());
         }
     }
 
@@ -299,14 +273,5 @@ public class CustomTextClock extends TextView {
             NumString = UnitsString[num];
         }
         return NumString;
-    }
-
-    private Bitmap drawEmpty() {
-        Bitmap convertedBitmap = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(convertedBitmap);
-        Paint paint = new Paint();
-        paint.setColor(Color.YELLOW);
-        canvas.drawPaint(paint);
-        return convertedBitmap;
     }
 }
