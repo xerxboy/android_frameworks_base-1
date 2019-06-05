@@ -346,8 +346,9 @@ final class PendingIntentRecord extends IIntentSender.Stub {
                                 res = owner.getActivityStartController().startActivitiesInPackage(
                                         uid, callingPid, callingUid, key.packageName, allIntents,
                                         allResolvedTypes, resultTo, mergedOptions, userId,
-                                        false /* validateIncomingUser */,
-                                        this /* originatingPendingIntent */);
+
+                                        false /* validateIncomingUser */);
+
                             } else {
                                 res = owner.getActivityStartController().startActivityInPackage(uid,
                                         callingPid, callingUid, key.packageName, finalIntent,

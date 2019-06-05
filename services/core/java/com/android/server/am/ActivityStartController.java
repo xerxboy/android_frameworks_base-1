@@ -285,15 +285,19 @@ public class ActivityStartController {
      */
     final int startActivitiesInPackage(int uid, String callingPackage, Intent[] intents,
             String[] resolvedTypes, IBinder resultTo, SafeActivityOptions options, int userId,
-            boolean validateIncomingUser, PendingIntentRecord originatingPendingIntent) {
+
+            boolean validateIncomingUser) {
         return startActivitiesInPackage(uid, 0, UserHandle.USER_NULL,
              callingPackage, intents, resolvedTypes, resultTo, options, userId,
-             validateIncomingUser,originatingPendingIntent);
+             validateIncomingUser);
+
     }
 
     final int startActivitiesInPackage(int uid, int realCallingPid, int realCallingUid,
             String callingPackage, Intent[] intents, String[] resolvedTypes, IBinder resultTo,
-            SafeActivityOptions options, int userId, boolean validateIncomingUser,PendingIntentRecord originatingPendingIntent) {
+
+            SafeActivityOptions options, int userId, boolean validateIncomingUser) {
+
         final String reason = "startActivityInPackage";
 
         userId = checkTargetUser(userId, validateIncomingUser, Binder.getCallingPid(),
@@ -301,12 +305,16 @@ public class ActivityStartController {
 
         // TODO: Switch to user app stacks here.
         return startActivities(null, uid, realCallingPid, realCallingUid, callingPackage, intents,
-                resolvedTypes, resultTo, options, userId, reason,originatingPendingIntent);
+
+                resolvedTypes, resultTo, options, userId, reason);
+
     }
 
     int startActivities(IApplicationThread caller, int callingUid, int incomingRealCallingPid,
             int incomingRealCallingUid, String callingPackage, Intent[] intents, String[] resolvedTypes,
-            IBinder resultTo, SafeActivityOptions options, int userId, String reason,PendingIntentRecord originatingPendingIntent) {
+
+            IBinder resultTo, SafeActivityOptions options, int userId, String reason) {
+
         if (intents == null) {
             throw new NullPointerException("intents is null");
         }

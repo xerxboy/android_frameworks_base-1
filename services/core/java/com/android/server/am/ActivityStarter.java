@@ -373,6 +373,7 @@ class ActivityStarter {
             avoidMoveToFront = false;
             allowPendingRemoteAnimationRegistryLookup = true;
             originatingPendingIntent = null;
+
             filterCallingUid = DEFAULT_REAL_CALLING_UID;
         }
 
