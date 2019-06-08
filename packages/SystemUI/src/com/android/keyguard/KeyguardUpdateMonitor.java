@@ -798,7 +798,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
                 final boolean dashChargeStatus = intent.getBooleanExtra(EXTRA_DASH_CHARGER, false);
                 final Message msg = mHandler.obtainMessage(
                         MSG_BATTERY_UPDATE, new BatteryStatus(status, level, plugged, health,
-                                maxChargingMicroWatt, dashChargeStatus,maxChargingMicroAmp, maxChargingMicroVolt));
+                                maxChargingMicroWatt,maxChargingMicroAmp, maxChargingMicroVolt,dashChargeStatus));
                 mHandler.sendMessage(msg);
             } else if (TelephonyIntents.ACTION_SIM_STATE_CHANGED.equals(action)) {
                 SimData args = SimData.fromIntent(intent);
