@@ -1214,7 +1214,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     Settings.System.NAVIGATION_BAR_WIDTH), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    LineageSettings.System.SWIPE_TO_SCREENSHOT), false, this,
+                    Settings.System.SWIPE_TO_SCREENSHOT), false, this,
                     UserHandle.USER_ALL);
 
             updateSettings();
@@ -2910,7 +2910,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
             // Three Finger Gesture
             boolean threeFingerGesture = Settings.System.getIntForUser(resolver,
-                    LineageSettings.System.SWIPE_TO_SCREENSHOT, 0, UserHandle.USER_CURRENT) == 1;
+                    Settings.System.SWIPE_TO_SCREENSHOT, 0, UserHandle.USER_CURRENT) == 1;
             enableSwipeThreeFingerGesture(threeFingerGesture);
 
             // Configure rotation lock.
