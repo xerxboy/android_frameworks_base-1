@@ -4518,7 +4518,8 @@ public final class Settings {
          * @hide
          */
         public static final String ACCENT_PICKER = "accent_picker";
-       
+
+         /** @hide */
         public static final Validator ACCENT_PICKER_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 29);
 
