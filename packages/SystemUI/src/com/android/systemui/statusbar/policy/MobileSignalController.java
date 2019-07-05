@@ -135,7 +135,7 @@ public class MobileSignalController extends SignalController<
            resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.DATA_DISABLED_ICON), 
                     false, this, UserHandle.USER_ALL);
-                      updateSettings();
+                      
 
         }
 
@@ -148,17 +148,21 @@ public class MobileSignalController extends SignalController<
                             mContext.getContentResolver(),
                             Settings.System.SHOW_LTE_FOURGEE,
                             0, UserHandle.USER_CURRENT) == 1;
+
+                     mapIconSets();
+                    updateTelephony();
+            }
+                if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.DATA_DISABLED_ICON))) {
+                           mDataDisabledIcon = Settings.System.getIntForUser( mContext.getContentResolver(),
+                Settings.System.DATA_DISABLED_ICON, 1, 
+                UserHandle.USER_CURRENT) == 1;
+
                     mapIconSets();
                     updateTelephony();
             }
         }
-    private void updateSettings() {
-        ContentResolver resolver = mContext.getContentResolver();
-         mDataDisabledIcon = Settings.System.getIntForUser(resolver,
-                Settings.System.DATA_DISABLED_ICON, 1, 
-                UserHandle.USER_CURRENT) == 1;
     }
-
     public void setConfiguration(Config config) {
         mConfig = config;
         mapIconSets();
