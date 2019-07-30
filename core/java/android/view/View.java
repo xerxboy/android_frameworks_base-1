@@ -20299,27 +20299,23 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
         }
 
         saveCount = canvas.getSaveCount();
-        int topSaveCount = -1;
-        int bottomSaveCount = -1;
-        int leftSaveCount = -1;
-        int rightSaveCount = -1;
 
         int solidColor = getSolidColor();
         if (solidColor == 0) {
             if (drawTop) {
-                topSaveCount = canvas.saveUnclippedLayer(left, top, right, top + length);
+                canvas.saveUnclippedLayer(left, top, right, top + length);
             }
 
             if (drawBottom) {
-                bottomSaveCount = canvas.saveUnclippedLayer(left, bottom - length, right, bottom);
+                canvas.saveUnclippedLayer(left, bottom - length, right, bottom);
             }
 
             if (drawLeft) {
-                leftSaveCount = canvas.saveUnclippedLayer(left, top, left + length, bottom);
+                canvas.saveUnclippedLayer(left, top, left + length, bottom);
             }
 
             if (drawRight) {
-                rightSaveCount = canvas.saveUnclippedLayer(right - length, top, right, bottom);
+                canvas.saveUnclippedLayer(right - length, top, right, bottom);
             }
         } else {
             scrollabilityCache.setFadeColor(solidColor);
@@ -20336,31 +20332,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
         final Matrix matrix = scrollabilityCache.matrix;
         final Shader fade = scrollabilityCache.shader;
 
-        // must be restored in the reverse order that they were saved
-        if (drawRight) {
-            matrix.setScale(1, fadeHeight * rightFadeStrength);
-            matrix.postRotate(90);
-            matrix.postTranslate(right, top);
-            fade.setLocalMatrix(matrix);
-            p.setShader(fade);
-            if (solidColor == 0) {
-                canvas.restoreUnclippedLayer(rightSaveCount, p);
-            } else {
-                canvas.drawRect(right - length, top, right, bottom, p);
-            }
-        }
-
-        if (drawLeft) {
-            matrix.setScale(1, fadeHeight * leftFadeStrength);
-            matrix.postRotate(-90);
+        if (drawTop) {
+            matrix.setScale(1, fadeHeight * topFadeStrength);
             matrix.postTranslate(left, top);
             fade.setLocalMatrix(matrix);
             p.setShader(fade);
-            if (solidColor == 0) {
-                canvas.restoreUnclippedLayer(leftSaveCount, p);
-            } else {
-                canvas.drawRect(left, top, left + length, bottom, p);
-            }
+            canvas.drawRect(left, top, right, top + length, p);
         }
 
         if (drawBottom) {
@@ -20369,23 +20346,25 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
             matrix.postTranslate(left, bottom);
             fade.setLocalMatrix(matrix);
             p.setShader(fade);
-            if (solidColor == 0) {
-                canvas.restoreUnclippedLayer(bottomSaveCount, p);
-            } else {
-                canvas.drawRect(left, bottom - length, right, bottom, p);
-            }
+            canvas.drawRect(left, bottom - length, right, bottom, p);
         }
 
-        if (drawTop) {
-            matrix.setScale(1, fadeHeight * topFadeStrength);
+        if (drawLeft) {
+            matrix.setScale(1, fadeHeight * leftFadeStrength);
+            matrix.postRotate(-90);
             matrix.postTranslate(left, top);
             fade.setLocalMatrix(matrix);
             p.setShader(fade);
-            if (solidColor == 0) {
-                canvas.restoreUnclippedLayer(topSaveCount, p);
-            } else {
-                canvas.drawRect(left, top, right, top + length, p);
-            }
+            canvas.drawRect(left, top, left + length, bottom, p);
+        }
+
+        if (drawRight) {
+            matrix.setScale(1, fadeHeight * rightFadeStrength);
+            matrix.postRotate(90);
+            matrix.postTranslate(right, top);
+            fade.setLocalMatrix(matrix);
+            p.setShader(fade);
+            canvas.drawRect(right - length, top, right, bottom, p);
         }
 
         canvas.restoreToCount(saveCount);
