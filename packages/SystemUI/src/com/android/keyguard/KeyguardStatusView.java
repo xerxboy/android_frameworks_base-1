@@ -575,15 +575,6 @@ public class KeyguardStatusView extends GridLayout implements
                 mClockView.setSingleLine(false);
                 mClockView.setGravity(Gravity.CENTER);
                 break;
-            case 6: // sammy accent
-                params.addRule(RelativeLayout.BELOW, R.id.clock_view);
-                mClockView.setSingleLine(false);
-                mClockView.setGravity(Gravity.CENTER);
-                mClockView.setLineSpacing(0, 0.8f);
-                break;
-            case 7: // custom text clock
-                 params.addRule(RelativeLayout.BELOW, R.id.custom_textclock_view);
-                 break
         }
 
         updateVisibilities();
