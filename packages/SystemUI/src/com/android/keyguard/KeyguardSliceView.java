@@ -60,6 +60,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
+import android.util.TypedValue;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
@@ -363,6 +364,16 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
                 action.send();
             } catch (PendingIntent.CanceledException e) {
                 Log.i(TAG, "Pending intent cancelled, nothing to launch", e);
+            }
+        }
+    }
+    
+    public void setViewsTextSize(int scale, float size) {
+        int childCount = mRow.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View v = mRow.getChildAt(i);
+            if (v instanceof Button) {
+                ((Button) v).setTextSize(scale, size);
             }
         }
     }
