@@ -223,7 +223,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
             }
         } else { // center align date & weather for other clock styles
             mRow.setPaddingRelative(0, 0, 0, 0);
-            mRow.setGravity(Gravity.CENTER);
+            mRow.setGravity(Gravity.START);
         }
         mRow.setVisibility(subItemsCount > 0 ? ((mShowInfo || mDarkAmount == 1) ? VISIBLE : GONE)
                 : GONE);
