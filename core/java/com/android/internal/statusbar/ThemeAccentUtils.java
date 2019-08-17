@@ -94,6 +94,7 @@ public class ThemeAccentUtils {
         "com.android.systemui.qstile.squircle", // 3
         "com.android.systemui.qstile.teardrop", // 4
          "com.android.systemui.qstile.neonlike", //5
+         "com.android.systemui.qstile.oos" //6
     };
 
     // Unloads the stock dark theme
