@@ -485,14 +485,12 @@
     <!-- Titles for debug renderer preference. [CHAR LIMIT=50] -->
     <string-array name="debug_hw_renderer_entries">
         <item>OpenGL (Skia) (Default)</item>
-        <item>Vulkan (Skia)</item>
         <item>OpenGL</item>
     </string-array>
 
     <!-- Values for debug renderer preference. -->
     <string-array name="debug_hw_renderer_values" translatable="false" >
         <item>skiagl</item>
-        <item>skiavk</item>
         <item>opengl</item>
     </string-array>
 
