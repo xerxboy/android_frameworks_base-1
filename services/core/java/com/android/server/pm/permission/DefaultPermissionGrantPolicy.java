@@ -1012,6 +1012,11 @@ public final class DefaultPermissionGrantPolicy {
         if (packageNames == null) {
             return;
         }
+        // Google Markup
+        PackageParser.Package googlemarkupPackage = getSystemPackage("com.google.android.markup");
+        if (googlemarkupPackage != null && doesPackageSupportRuntimePermissions(googlemarkupPackage)) {
+            grantRuntimePermissions(googlemarkupPackage, STORAGE_PERMISSIONS, userId);
+        }
         for (String packageName : packageNames) {
             PackageParser.Package dataServicePackage = getSystemPackage(packageName);
             if (dataServicePackage != null
