@@ -288,12 +288,12 @@ public class ActivityStartController {
             boolean validateIncomingUser, PendingIntentRecord originatingPendingIntent) {
         return startActivitiesInPackage(uid, 0, UserHandle.USER_NULL,
              callingPackage, intents, resolvedTypes, resultTo, options, userId,
-             validateIncomingUser);
+             validateIncomingUser,originatingPendingIntent);
     }
 
     final int startActivitiesInPackage(int uid, int realCallingPid, int realCallingUid,
             String callingPackage, Intent[] intents, String[] resolvedTypes, IBinder resultTo,
-            SafeActivityOptions options, int userId, boolean validateIncomingUser) {
+            SafeActivityOptions options, int userId, boolean validateIncomingUser,PendingIntentRecord originatingPendingIntent) {
         final String reason = "startActivityInPackage";
 
         userId = checkTargetUser(userId, validateIncomingUser, Binder.getCallingPid(),
