@@ -4955,7 +4955,7 @@ public final class Settings {
           * Defaults to 1 - sounds enabled
           * @hide
           */
-         public static final String SCREENSHOT_SHUTTER_SOUND = "screenshot_shutter_sound";
+         public static final String SCREENSHOT_SOUND = "screenshot_sound";
 
         /**
          * Change font size for the lockscreen text clock widget
