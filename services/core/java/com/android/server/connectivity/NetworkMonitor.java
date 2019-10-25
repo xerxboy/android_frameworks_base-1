@@ -809,7 +809,7 @@ public class NetworkMonitor extends StateMachine {
             try {
                 // Do a blocking DNS resolution using the network-assigned nameservers.
                 // Do not set AI_ADDRCONFIG in ai_flags so we get all address families in advance.
-                final InetAddress[] ips = ResolvUtil.blockingResolveAllLocally(
+                final InetAddress[] ips = resolveAllLocally(
                         mNetwork, mPrivateDnsProviderHostname, 0 /* aiFlags */);
                 mPrivateDnsConfig = new PrivateDnsConfig(mPrivateDnsProviderHostname, ips);
             } catch (UnknownHostException uhe) {
@@ -843,7 +843,7 @@ public class NetworkMonitor extends StateMachine {
             final String host = UUID.randomUUID().toString().substring(0, 8) +
                     ONE_TIME_HOSTNAME_SUFFIX;
             try {
-                final InetAddress[] ips = mNetworkAgentInfo.network().getAllByName(host);
+                final InetAddress[] ips = getAllByName(mNetworkAgentInfo.network(), host);
                 return (ips != null && ips.length > 0);
             } catch (UnknownHostException uhe) {}
             return false;
@@ -1059,7 +1059,7 @@ public class NetworkMonitor extends StateMachine {
         int result;
         String connectInfo;
         try {
-            InetAddress[] addresses = mNetwork.getAllByName(host);
+            InetAddress[] addresses = getAllByName(mNetwork, host);
             StringBuffer buffer = new StringBuffer();
             for (InetAddress address : addresses) {
                 buffer.append(',').append(address.getHostAddress());
@@ -1244,6 +1244,18 @@ public class NetworkMonitor extends StateMachine {
             validationLog("Error: http or https probe wait interrupted!");
             return CaptivePortalProbeResult.FAILED;
         }
+    }
+
+    @VisibleForTesting
+    protected InetAddress[] getAllByName(Network network, String host) throws UnknownHostException {
+        return network.getAllByName(host);
+    }
+
+    @VisibleForTesting
+    protected InetAddress[] resolveAllLocally(Network network, String hostname, int flags)
+            throws UnknownHostException {
+        // We cannot use this in OneAddressPerFamilyNetwork#getAllByName because that's static.
+        return ResolvUtil.blockingResolveAllLocally(network, hostname, flags);
     }
 
     private URL makeURL(String url) {
